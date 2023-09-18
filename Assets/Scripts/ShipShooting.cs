@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ShipShooting : MonoBehaviour
@@ -9,17 +10,22 @@ public class ShipShooting : MonoBehaviour
     public GameObject explosionEffect; // Drag your explosion prefab here
     public AudioSource audioSource; // Drag your AudioSource component here
     public AudioClip explosionSound; // Drag your explosion sound here
+    public AudioClip readyToShootSound; // Drag your ready-to-shoot sound here
+    public float shootCooldown = 2.0f; // Time between shots
+    private bool canShoot = true;
 
     void Update()
     {
-        if (secondaryCamera.enabled && Input.GetKeyDown(KeyCode.Space))
+        if (secondaryCamera.enabled && Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
-            Shoot();
+            StartCoroutine(Shoot());
         }
     }
 
-    void Shoot()
+    IEnumerator Shoot()
     {
+        canShoot = false;
+
         // Instantiate bullet and apply force
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
@@ -34,5 +40,15 @@ public class ShipShooting : MonoBehaviour
 
         // Play explosion sound
         audioSource.PlayOneShot(explosionSound);
+
+        // Wait for cooldown
+        yield return new WaitForSeconds(shootCooldown - 0.5f); // Wait for 1.5 seconds
+
+        // Play ready-to-shoot sound just before next shot is ready
+        audioSource.PlayOneShot(readyToShootSound);
+
+        yield return new WaitForSeconds(0.5f); // Wait for additional 0.5 seconds
+
+        canShoot = true;
     }
 }
