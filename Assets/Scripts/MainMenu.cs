@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
-    public void LoadGame(Game)
+    public void LoadGame(string Game) 
     {
         SceneManager.LoadScene(Game);
     }
