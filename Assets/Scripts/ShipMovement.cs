@@ -18,6 +18,12 @@ public class ShipMovement : MonoBehaviour
     public float emissionBuildUpSpeed = 10f;
     private float currentEmissionRate = 0f;
 
+    private Rigidbody rb;
+    public float bounceForce = 3f;
+    public float islandHeightThreshold = 0.7f;
+
+    private float lastBounceTime = 0f;
+    private float bounceCooldown = 1f;
     public AudioSource audioSource; // Drag your AudioSource component here
     public AudioClip boostSound; // Drag your boost sound here
     public float fadeDuration = 1.0f; // Duration for fade in/out
@@ -29,6 +35,7 @@ public class ShipMovement : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         mainCamera.enabled = true;
         secondaryCamera.enabled = false;
         mainCamera.fieldOfView = normalFOV;
@@ -94,6 +101,14 @@ public class ShipMovement : MonoBehaviour
                 }
                 fadeCoroutine = StartCoroutine(FadeOutAudio());
             }
+        }
+
+        if (transform.position.y > islandHeightThreshold && Time.time - lastBounceTime > bounceCooldown) {
+            lastBounceTime = Time.time;
+            Vector3 bounceDirection = -transform.forward;
+
+            // Apply a force to simulate the bounce
+            rb.AddForce(bounceDirection * bounceForce, ForceMode.Impulse);
         }
 
         mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, targetFOV, fovTransitionSpeed * Time.deltaTime);
