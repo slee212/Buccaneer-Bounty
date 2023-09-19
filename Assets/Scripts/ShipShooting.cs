@@ -45,7 +45,7 @@ public class ShipShooting : MonoBehaviour
         yield return new WaitForSeconds(shootCooldown - 0.5f); // Wait for 1.5 seconds
 
         // Play ready-to-shoot sound just before next shot is ready
-        audioSource.PlayOneShot(readyToShootSound);
+       audioSource.PlayOneShot(readyToShootSound);
 
         yield return new WaitForSeconds(0.5f); // Wait for additional 0.5 seconds
 

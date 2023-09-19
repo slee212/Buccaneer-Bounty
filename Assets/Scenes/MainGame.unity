@@ -3307,35 +3307,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5095220032927947908, guid: d3635b491b8c9c647a71a8869eb50e49, type: 3}
   m_PrefabInstance: {fileID: 2113902302}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1134365076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134365075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28cb9b50d9378284f8bbb457a527be9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  boostedSpeed: 10
-  rotationSpeed: 200
-  mainCamera: {fileID: 0}
-  secondaryCamera: {fileID: 0}
-  normalFOV: 60
-  boostedFOV: 70
-  fovTransitionSpeed: 2
-  windEffect: {fileID: 0}
-  maxEmissionRate: 50
-  emissionBuildUpSpeed: 10
-  bounceForce: 3
-  islandHeightThreshold: 0.7
-  audioSource: {fileID: 0}
-  boostSound: {fileID: 0}
-  fadeDuration: 1
-  waterSplashEffect: {fileID: 0}
 --- !u!65 &1134365080
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3845,6 +3816,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2233387031493017654, guid: 05e2c56e7c3c6af40973bad84274939a, type: 3}
+      propertyPath: m_ScaleFactor
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 2954831070930916170, guid: 05e2c56e7c3c6af40973bad84274939a, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3932,6 +3907,10 @@ PrefabInstance:
     - target: {fileID: 3503259718349655157, guid: 05e2c56e7c3c6af40973bad84274939a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287727595157545466, guid: 05e2c56e7c3c6af40973bad84274939a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -758.2
       objectReference: {fileID: 0}
     - target: {fileID: 7748645537102603984, guid: 05e2c56e7c3c6af40973bad84274939a, type: 3}
       propertyPath: m_text
@@ -5250,6 +5229,10 @@ PrefabInstance:
       value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 4172403573578018873, guid: b2c14b08b17ba6b40afb1f66388ab08d, type: 3}
+      propertyPath: readyToShootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: abe5c4ab1c3c61046b916a5f7229e1d6, type: 3}
+    - target: {fileID: 4172403573578018873, guid: b2c14b08b17ba6b40afb1f66388ab08d, type: 3}
       propertyPath: waypoints.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -6127,6 +6110,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 482249960153172859, guid: d3635b491b8c9c647a71a8869eb50e49, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4519406768937246768, guid: d3635b491b8c9c647a71a8869eb50e49, type: 3}
       propertyPath: m_TagString
       value: Player
@@ -6141,7 +6128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5095220032927947908, guid: d3635b491b8c9c647a71a8869eb50e49, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: MainCamera
       objectReference: {fileID: 0}
     - target: {fileID: 5619941699912435262, guid: d3635b491b8c9c647a71a8869eb50e49, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6191,9 +6178,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5095220032927947908, guid: d3635b491b8c9c647a71a8869eb50e49, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1134365076}
     - targetCorrespondingSourceObject: {fileID: 5095220032927947908, guid: d3635b491b8c9c647a71a8869eb50e49, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1134365081}

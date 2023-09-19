@@ -40,6 +40,7 @@ public class ShipMovement : MonoBehaviour
         secondaryCamera.enabled = false;
         mainCamera.fieldOfView = normalFOV;
 
+
         // Initialize emission module for wind effect
         emissionModule = windEffect.emission;
 
@@ -49,6 +50,17 @@ public class ShipMovement : MonoBehaviour
 
         // Initialize water splash main module
         mainModule = waterSplashEffect.main;
+
+        if (mainCamera.enabled)
+        {
+            mainCamera.GetComponent<AudioListener>().enabled = true;
+            secondaryCamera.GetComponent<AudioListener>().enabled = false;
+        }
+        else
+        {
+            mainCamera.GetComponent<AudioListener>().enabled = false;
+            secondaryCamera.GetComponent<AudioListener>().enabled = true;
+        }
     }
 
     void Update()
