@@ -3912,6 +3912,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -758.2
       objectReference: {fileID: 0}
+    - target: {fileID: 6808161504024461021, guid: 05e2c56e7c3c6af40973bad84274939a, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7748645537102603984, guid: 05e2c56e7c3c6af40973bad84274939a, type: 3}
       propertyPath: m_text
       value: 
