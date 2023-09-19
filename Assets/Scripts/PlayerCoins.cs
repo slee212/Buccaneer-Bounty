@@ -15,7 +15,13 @@ public class PlayerCoins : MonoBehaviour
     {
         UpdateCoinUI();
     }
-
+    public void AddCoin()
+    {
+            Debug.Log("AddCoin method called!");  // Debug lo
+        coins++;
+        Debug.Log("Coin collected! Current coins: " + coins);
+        UpdateCoinUI();
+    }
     // Update is called once per frame
     public void SpendCoins(int amount)
     {

@@ -11,7 +11,7 @@ public class EnemyAIShip : MonoBehaviour
     public float patrolDistance = 10.0f;
     public float chaseDistance = 15.0f;
     public float shootDistance = 5.0f;
-
+    public int health = 5;
     public float bulletSpeed = 20.0f;
     public GameObject explosionEffect;
     public AudioSource audioSource;
@@ -36,7 +36,26 @@ public class EnemyAIShip : MonoBehaviour
             Debug.LogError("NavMeshAgent component not found.");
         }
     }
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log("Enemy hit! Current health: " + health);  // Log when hit
 
+        if (health <= 0)
+        {                
+
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                PlayerCoins player = playerObj.GetComponent<PlayerCoins>();
+                if (player != null)
+                {
+                    player.AddCoin();  // Add a coin to the player
+                }
+            }
+            Destroy(gameObject); // Destroy the enemy GameObject
+        }
+    }
     void Update()
     {
         if (navMeshAgent == null || player == null) return;
@@ -46,21 +65,19 @@ public class EnemyAIShip : MonoBehaviour
 
         if (distanceToPlayer <= shootDistance)
         {
-            Debug.Log("Shooting");
             AimAtPlayer();  // Add this line to aim at the player
             Shoot();
             navMeshAgent.isStopped = true;
         }
         else if (distanceToPlayer <= chaseDistance)
         {
-            Debug.Log("Chasing");
+            navMeshAgent.isStopped = false;
+
             currentSpeed = boostedSpeed;
             ChasePlayer(currentSpeed);
-            Shoot();
         }
         else
         {
-            Debug.Log("Patrolling");
             Patrol(currentSpeed);
         }
     }
