@@ -47,6 +47,7 @@ public class EnemyAIShip : MonoBehaviour
         if (distanceToPlayer <= shootDistance)
         {
             Debug.Log("Shooting");
+            AimAtPlayer();  // Add this line to aim at the player
             Shoot();
             navMeshAgent.isStopped = true;
         }
@@ -63,7 +64,12 @@ public class EnemyAIShip : MonoBehaviour
             Patrol(currentSpeed);
         }
     }
-
+    void AimAtPlayer()
+    {
+        Vector3 directionToPlayer = (player.position - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxRotationSpeed * Time.deltaTime);
+    }
     void Patrol(float currentSpeed)
     {
         Vector3 target = waypoints[currentWaypoint].position;
