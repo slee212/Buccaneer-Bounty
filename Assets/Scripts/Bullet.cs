@@ -3,6 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int damage = 1; // Damage dealt by the bullet
+    public GameObject destroyEffect; // Prefab for the destroy effect
 
     void OnTriggerEnter(Collider other)
     {
@@ -14,7 +15,7 @@ public class Bullet : MonoBehaviour
                 Debug.Log("Bullet hit enemy!"); 
                 enemy.TakeDamage(damage);
             }
-            Destroy(gameObject); // Destroy the bullet
+            RunDestroyEffect();
         }
         if (other.gameObject.tag == "Player")
         {
@@ -26,7 +27,15 @@ public class Bullet : MonoBehaviour
 
                 player.TakeDamage(damage);
             }
-            Destroy(gameObject); // Destroy the bullet
+            RunDestroyEffect();
         }
+    }
+        void RunDestroyEffect()
+    {
+        if (destroyEffect != null)
+        {
+            Instantiate(destroyEffect, transform.position, Quaternion.identity);
+        }
+        Destroy(gameObject);
     }
 }
