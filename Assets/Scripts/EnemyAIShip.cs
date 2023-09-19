@@ -1,0 +1,115 @@
+using UnityEngine;
+using System.Collections;
+using UnityEngine.AI; // Import the AI namespace
+
+public class EnemyAIShip : MonoBehaviour
+{
+    public Transform[] waypoints;
+    public float speed = 5.0f;
+    public float boostedSpeed = 10.0f;
+    public float maxRotationSpeed = 30.0f;
+    public float patrolDistance = 10.0f;
+    public float chaseDistance = 15.0f;
+    public float shootDistance = 5.0f;
+
+    public float bulletSpeed = 20.0f;
+    public GameObject explosionEffect;
+    public AudioSource audioSource;
+    public AudioClip explosionSound;
+    public AudioClip readyToShootSound;
+    public float shootCooldown = 2.0f;
+    private bool canShoot = true;
+    public GameObject bulletPrefab;
+    public Transform bulletSpawnPoint;
+
+    private Transform player;
+    private int currentWaypoint = 0;
+
+    private NavMeshAgent navMeshAgent; // Declare NavMeshAgent variable
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        if (navMeshAgent == null)
+        {
+            Debug.LogError("NavMeshAgent component not found.");
+        }
+    }
+
+    void Update()
+    {
+        if (navMeshAgent == null || player == null) return;
+
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float currentSpeed = speed;
+
+        if (distanceToPlayer <= shootDistance)
+        {
+            Debug.Log("Shooting");
+            Shoot();
+            navMeshAgent.isStopped = true;
+        }
+        else if (distanceToPlayer <= chaseDistance)
+        {
+            Debug.Log("Chasing");
+            currentSpeed = boostedSpeed;
+            ChasePlayer(currentSpeed);
+            Shoot();
+        }
+        else
+        {
+            Debug.Log("Patrolling");
+            Patrol(currentSpeed);
+        }
+    }
+
+    void Patrol(float currentSpeed)
+    {
+        Vector3 target = waypoints[currentWaypoint].position;
+        navMeshAgent.SetDestination(target);
+        navMeshAgent.speed = currentSpeed;
+
+        if (Vector3.Distance(transform.position, target) < patrolDistance)
+        {
+            currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
+        }
+    }
+
+    void ChasePlayer(float currentSpeed)
+    {
+        navMeshAgent.SetDestination(player.position);
+        navMeshAgent.speed = currentSpeed;
+    }
+
+    void Shoot()
+    {
+        if (canShoot)
+        {
+            StartCoroutine(ShootCoroutine());
+        }
+    }
+
+    IEnumerator ShootCoroutine()
+    {
+        canShoot = false;
+
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.Impulse);
+        }
+
+        GameObject explosion = Instantiate(explosionEffect, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        Destroy(explosion, 2.0f);
+
+        audioSource.PlayOneShot(explosionSound);
+
+        yield return new WaitForSeconds(shootCooldown - 0.5f);
+        audioSource.PlayOneShot(readyToShootSound);
+        yield return new WaitForSeconds(0.5f);
+
+        canShoot = true;
+    }
+}
