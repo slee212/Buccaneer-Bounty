@@ -27,12 +27,18 @@ public class ShopSystem : MonoBehaviour
     public PlayerBullet damage;
 
     public TextMeshProUGUI coinText;
+    public TextMeshProUGUI fireRateUpgradeText;
+    public TextMeshProUGUI speedUpgradeText;
+    public TextMeshProUGUI damageUpgradeText;
+    public TextMeshProUGUI shipUpgradeText;
+
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Shop initiated");
         UpdateCoinUI();
         UpdateButtonInteractivity();
+        UpdateShopTexts();
     }
 
     // Update is called once per frame
@@ -60,6 +66,7 @@ public class ShopSystem : MonoBehaviour
 
             UpdateCoinUI();
             UpdateButtonInteractivity();
+            UpdateShopTexts();
         }
     }
 
@@ -77,6 +84,7 @@ public class ShopSystem : MonoBehaviour
 
             UpdateCoinUI();
             UpdateButtonInteractivity();
+            UpdateShopTexts();
         }
     }
 
@@ -93,6 +101,7 @@ public class ShopSystem : MonoBehaviour
 
             UpdateCoinUI();
             UpdateButtonInteractivity();
+            UpdateShopTexts();
         }
     }
 
@@ -124,5 +133,56 @@ public class ShopSystem : MonoBehaviour
         upgradeSpeed.interactable = CanAffordUpgrade(speedCost) && speedLevel < 5;
         upgradeDamage.interactable = CanAffordUpgrade(damageCost) && damageLevel < 5;
         upgradeShip.interactable = CanAffordUpgrade(shipCost) && shipLevel < 3;
+    }
+
+    public void UpdateShopTexts()
+    {
+        // Fire Rate Text
+        if (fireRateLevel < 5)
+        {
+            float currentFireRateValue = fireRate.shootCooldown;
+            float nextFireRateValue = currentFireRateValue - 0.25f;
+            fireRateUpgradeText.text = $"{currentFireRateValue}s > {nextFireRateValue}s";
+        }
+        else
+        {
+            fireRateUpgradeText.text = "Max Level";
+        }
+
+        // Speed Text
+        if (speedLevel < 5)
+        {
+            float currentSpeedValue = speed.speed;
+            float nextSpeedValue = currentSpeedValue + 2.0f;
+            speedUpgradeText.text = $"{currentSpeedValue} > {nextSpeedValue}";
+        }
+        else
+        {
+            speedUpgradeText.text = "Max Level";
+        }
+
+        // Damage Text
+        if (damageLevel < 5)
+        {
+            float currentDamageValue = damage.damage;
+            float nextDamageValue = currentDamageValue + 20;
+            damageUpgradeText.text = $"{currentDamageValue} > {nextDamageValue}";
+        }
+        else
+        {
+            fireRateUpgradeText.text = "Max Level";
+        }
+
+        // Ship Text
+        if (shipLevel < 5)
+        {
+            float currentFireRateValue = fireRate.shootCooldown;
+            float nextFireRateValue = currentFireRateValue - 0.25f;
+            fireRateUpgradeText.text = $"{currentFireRateValue}s > {nextFireRateValue}s";
+        }
+        else
+        {
+            fireRateUpgradeText.text = "Max Level";
+        }
     }
 }
