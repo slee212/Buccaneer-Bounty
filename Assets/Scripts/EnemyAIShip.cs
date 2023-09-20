@@ -36,6 +36,7 @@ public class EnemyAIShip : MonoBehaviour
             Debug.LogError("NavMeshAgent component not found.");
         }
     }
+    
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -56,6 +57,7 @@ public class EnemyAIShip : MonoBehaviour
             Destroy(gameObject); // Destroy the enemy GameObject
         }
     }
+
     void Update()
     {
         if (navMeshAgent == null || player == null) return;
@@ -81,12 +83,14 @@ public class EnemyAIShip : MonoBehaviour
             Patrol(currentSpeed);
         }
     }
+
     void AimAtPlayer()
     {
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxRotationSpeed * Time.deltaTime);
     }
+
     void Patrol(float currentSpeed)
     {
         Vector3 target = waypoints[currentWaypoint].position;

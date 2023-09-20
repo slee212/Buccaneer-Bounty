@@ -6,7 +6,7 @@ using TMPro;
 
 public class PlayerCoins : MonoBehaviour
 {
-    public int coins = 10;
+    public static int coins = 10;
 
     public TextMeshProUGUI coinText;
 
