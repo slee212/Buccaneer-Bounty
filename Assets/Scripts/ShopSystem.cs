@@ -21,6 +21,10 @@ public class ShopSystem : MonoBehaviour
     public Button upgradeDamage;
     public Button upgradeSpeed;
     public Button upgradeShip;
+    public ShipShooting fireRate;
+    public ShipMovement speed;
+    public ShipMovement boostedSpeed;
+    public PlayerBullet damage;
 
     public TextMeshProUGUI coinText;
     // Start is called before the first frame update
@@ -52,6 +56,7 @@ public class ShopSystem : MonoBehaviour
             fireRateLevel++;
             
             // Apply the fire rate upgrade logic
+            fireRate.shootCooldown -= 0.25f;
 
             UpdateCoinUI();
             UpdateButtonInteractivity();
@@ -67,6 +72,8 @@ public class ShopSystem : MonoBehaviour
             speedLevel++;
             
             // Apply the fire rate upgrade logic
+            speed.speed += 2.0f;
+            boostedSpeed.boostedSpeed += 2.0f;
 
             UpdateCoinUI();
             UpdateButtonInteractivity();
@@ -82,6 +89,7 @@ public class ShopSystem : MonoBehaviour
             damageLevel++;
             
             // Apply the fire rate upgrade logic
+            damage.damage += 20;
 
             UpdateCoinUI();
             UpdateButtonInteractivity();

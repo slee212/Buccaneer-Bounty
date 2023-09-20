@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class PlayerBullet : MonoBehaviour
 {
-    public int damage = 1; // Damage dealt by the bullet
+    public int damage = 35; // Damage dealt by the bullet
     public GameObject destroyEffect; // Prefab for the destroy effect
     public float lifeTime = 3.0f;
     private float elapsedTime;

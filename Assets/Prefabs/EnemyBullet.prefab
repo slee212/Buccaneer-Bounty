@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 7605637799763926664}
   - component: {fileID: 6473757636084536820}
   - component: {fileID: -8840310220687944618}
-  - component: {fileID: 1220279985728016045}
+  - component: {fileID: 214155287852156081}
   m_Layer: 6
-  m_Name: Sphere
-  m_TagString: Bullet
+  m_Name: EnemyBullet
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1220279985728016045
+--- !u!114 &214155287852156081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,8 +143,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6583497766454347557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6fa8720766ed5a469147ba8493f224e, type: 3}
+  m_Script: {fileID: 11500000, guid: 68a1d7c23834b284bbb55f89a97df5dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  destroyEffect: {fileID: 2453300066352703677, guid: e56f37afe2d8ee247b5339544096d456, type: 3}
+  damage: 20
+  destroyEffect: {fileID: 0}
+  lifeTime: 3

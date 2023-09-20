@@ -11,7 +11,7 @@ public class EnemyAIShip : MonoBehaviour
     public float patrolDistance = 10.0f;
     public float chaseDistance = 15.0f;
     public float shootDistance = 5.0f;
-    public int health = 5;
+    public int health = 100;
     public float bulletSpeed = 20.0f;
     public GameObject explosionEffect;
     public AudioSource audioSource;
@@ -36,7 +36,7 @@ public class EnemyAIShip : MonoBehaviour
             Debug.LogError("NavMeshAgent component not found.");
         }
     }
-    
+
     public void TakeDamage(int damage)
     {
         health -= damage;
