@@ -18,7 +18,7 @@ public class PlayerCoins : MonoBehaviour
     public void AddCoin()
     {
             Debug.Log("AddCoin method called!");  // Debug lo
-        coins++;
+        coins += 1;
         Debug.Log("Coin collected! Current coins: " + coins);
         UpdateCoinUI();
     }
