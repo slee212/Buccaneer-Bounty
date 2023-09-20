@@ -44,9 +44,6 @@ public class ShopSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AudioListener.pause = true; // Pause all sounds
-        Time.timeScale = 0;
-        Debug.Log("Updating buttons");
         UpdateButtonInteractivity();
     }
 

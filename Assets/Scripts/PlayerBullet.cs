@@ -10,8 +10,6 @@ public class PlayerBullet : MonoBehaviour
     void Start()
     {
         elapsedTime = 0.0f;
-        damage = 35;
-        Debug.Log(damage);
     }
     void Update()
     {
