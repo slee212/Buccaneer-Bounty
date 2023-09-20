@@ -20,8 +20,7 @@ public class EnemyAIShip : MonoBehaviour
     public float shootCooldown = 2.0f;
     private bool canShoot = true;
     public GameObject bulletPrefab;
-    public Transform bulletSpawnPoint;
-
+    public Transform[] bulletSpawnPoints;
     private Transform player;
     private int currentWaypoint = 0;
 
@@ -120,16 +119,24 @@ public class EnemyAIShip : MonoBehaviour
     IEnumerator ShootCoroutine()
     {
         canShoot = false;
+        float cannonFireDelay = 0.3f;  // Delay in seconds between firing each cannon
 
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        if (rb != null)
+        // Loop through each bullet spawn point and fire a bullet
+        foreach (Transform spawnPoint in bulletSpawnPoints)
         {
-            rb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.Impulse);
-        }
+            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.Impulse);
+            }
 
-        GameObject explosion = Instantiate(explosionEffect, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        Destroy(explosion, 2.0f);
+            GameObject explosion = Instantiate(explosionEffect, spawnPoint.position, spawnPoint.rotation);
+            Destroy(explosion, 2.0f);
+
+            // Wait for a tiny delay before firing the next cannon
+            yield return new WaitForSeconds(cannonFireDelay);
+        }
 
         audioSource.PlayOneShot(explosionSound);
 
