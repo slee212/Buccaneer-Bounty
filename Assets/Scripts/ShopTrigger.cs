@@ -7,6 +7,7 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject shopUI;
     private bool isPlayerInRange = false;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +17,15 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E)) {
-            ToggleShopUI();
-        }
+        //if (Time.timeScale == 1)
+        //{
+            if (!PauseMenu.isPaused && isPlayerInRange && Input.GetKeyDown(KeyCode.E))
+            {
+                AudioListener.pause = false; // Resume all sounds
+                ToggleShopUI();
+            }
+        //}
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,6 +35,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             isPlayerInRange = true;
             // shopPromptUI.SetActive(true);
+            
         }
     }
 
