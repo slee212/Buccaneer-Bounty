@@ -133,12 +133,13 @@ public class EnemyAIShip : MonoBehaviour
 
             GameObject explosion = Instantiate(explosionEffect, spawnPoint.position, spawnPoint.rotation);
             Destroy(explosion, 2.0f);
+            audioSource.PlayOneShot(explosionSound);
 
             // Wait for a tiny delay before firing the next cannon
             yield return new WaitForSeconds(cannonFireDelay);
+            
         }
 
-        audioSource.PlayOneShot(explosionSound);
 
         yield return new WaitForSeconds(shootCooldown - 0.5f);
         audioSource.PlayOneShot(readyToShootSound);

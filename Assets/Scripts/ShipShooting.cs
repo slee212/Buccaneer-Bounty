@@ -2,16 +2,16 @@ using System.Collections;
 using UnityEngine;
 
 public class ShipShooting : MonoBehaviour
-{
-    public Camera secondaryCamera;
+{    public Camera secondaryCamera;
     public GameObject bulletPrefab;
-    public Transform bulletSpawnPoint;
+    public Transform[] bulletSpawnPoints;  // Array of spawn points
     public float bulletSpeed = 20.0f;
-    public GameObject explosionEffect; // Drag your explosion prefab here
-    public AudioSource audioSource; // Drag your AudioSource component here
-    public AudioClip explosionSound; // Drag your explosion sound here
-    public AudioClip readyToShootSound; // Drag your ready-to-shoot sound here
-    public float shootCooldown = 2.0f; // Time between shots
+    public GameObject explosionEffect;
+    public AudioSource audioSource;
+    public AudioClip explosionSound;
+    public AudioClip readyToShootSound;
+    public float shootCooldown = 2.0f;
+    public float cannonFireDelay = 0.3f;  // Delay in seconds between firing each cannon
     private bool canShoot = true;
     public int damage = 35;
 
@@ -23,35 +23,33 @@ public class ShipShooting : MonoBehaviour
         }
     }
 
+
     IEnumerator Shoot()
     {
         canShoot = false;
 
-        // Instantiate bullet and apply force
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-
-        bullet.GetComponent<PlayerBullet>().SetDamage(damage);
-
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        if (rb != null)
+        foreach (Transform spawnPoint in bulletSpawnPoints)  // Loop through each bullet spawn point
         {
-            rb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.Impulse);
+            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+            bullet.GetComponent<PlayerBullet>().SetDamage(damage);
+
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.Impulse);
+            }
+
+            GameObject explosion = Instantiate(explosionEffect, spawnPoint.position, spawnPoint.rotation);
+            Destroy(explosion, 2.0f);
+
+            audioSource.PlayOneShot(explosionSound);
+
+            yield return new WaitForSeconds(cannonFireDelay);  // Wait before firing next cannon
         }
 
-        // Instantiate explosion effect
-        GameObject explosion = Instantiate(explosionEffect, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        Destroy(explosion, 2.0f); // Destroy the explosion effect after 2 seconds
-
-        // Play explosion sound
-        audioSource.PlayOneShot(explosionSound);
-
-        // Wait for cooldown
-        yield return new WaitForSeconds(shootCooldown - 0.5f); // Wait for 1.5 seconds
-
-        // Play ready-to-shoot sound just before next shot is ready
+        yield return new WaitForSeconds(shootCooldown - 0.5f);
         audioSource.PlayOneShot(readyToShootSound);
-
-        yield return new WaitForSeconds(0.5f); // Wait for additional 0.5 seconds
+        yield return new WaitForSeconds(0.5f);
 
         canShoot = true;
     }
