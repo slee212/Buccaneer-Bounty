@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public enum ShopType
+{
+    FirstShop,
+    SecondShop,
+    ThirdShop
+}
+
 public class ShopSystem : MonoBehaviour
 {
 
@@ -31,9 +38,17 @@ public class ShopSystem : MonoBehaviour
     public TextMeshProUGUI damageUpgradeText;
     public TextMeshProUGUI shipUpgradeText;
 
+    public ShopType currentShopType;
+
+    public GameObject level1Ship;
+    public GameObject level2Ship;
+    public GameObject currentShipInstance;
+
+    Vector3 startPosition = new Vector3(93, 1, 69);
+
     // Start is called before the first frame update
     void Start()
-    {
+    {   
         Debug.Log(player.damage);
         Debug.Log("Shop initiated");
         UpdateCoinUI();
@@ -110,9 +125,26 @@ public class ShopSystem : MonoBehaviour
         if (CanAffordUpgrade(shipCost) && shipLevel < 3)
         {
             PlayerCoins.coins -= shipCost;
-            shipLevel++;
             
-            // Apply the fire rate upgrade logic
+            if (shipLevel == 1)
+            {
+
+                // ShipShooting oldShipShooting = currentShipInstance.GetComponent<ShipShooting>();
+                // ShipMovement oldShipMovement = currentShipInstance.GetComponent<ShipMovement>();
+
+                Destroy(currentShipInstance);
+
+                currentShipInstance = Instantiate(level2Ship, currentShipInstance.transform.position, currentShipInstance.transform.rotation);
+
+                // ShipShooting newShipShooting = currentShipInstance.GetComponent<ShipShooting>();
+                // ShipMovement newShipMovement = currentShipInstance.GetComponent<ShipMovement>();
+
+                // newShipShooting.damage = oldShipShooting.damage;
+                // newShipShooting.shootCooldown = oldShipShooting.shootCooldown;
+                // newShipMovement.speed = oldShipMovement.speed;
+
+                shipLevel++;
+            }
 
             UpdateCoinUI();
             UpdateButtonInteractivity();
@@ -131,7 +163,19 @@ public class ShopSystem : MonoBehaviour
         upgradeFireRate.interactable = CanAffordUpgrade(fireRateCost) && fireRateLevel < 5;
         upgradeSpeed.interactable = CanAffordUpgrade(speedCost) && speedLevel < 5;
         upgradeDamage.interactable = CanAffordUpgrade(damageCost) && damageLevel < 5;
-        upgradeShip.interactable = CanAffordUpgrade(shipCost) && shipLevel < 3;
+
+        switch (currentShopType)
+        {
+            case ShopType.FirstShop:
+                upgradeShip.interactable = false;
+                break;
+            case ShopType.SecondShop:
+                upgradeShip.interactable = CanAffordUpgrade(shipCost) && shipLevel == 1;
+                break;
+            case ShopType.ThirdShop:
+                upgradeShip.interactable = CanAffordUpgrade(shipCost) && shipLevel == 2;
+                break;
+        }
     }
 
     public void UpdateShopTexts()
@@ -183,5 +227,11 @@ public class ShopSystem : MonoBehaviour
         {
             fireRateUpgradeText.text = "Max Level";
         }
+    }
+
+    public void SetCurrentShopType(ShopType type)
+    {
+        currentShopType = type;
+        UpdateButtonInteractivity();
     }
 }
