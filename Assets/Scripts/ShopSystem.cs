@@ -45,6 +45,8 @@ public class ShopSystem : MonoBehaviour
     public GameObject level3Ship;
     public GameObject currentShipInstance;
 
+    public PlayerShip playerShip;
+
     Vector3 startPosition = new Vector3(93, 1, 69);
 
     // Start is called before the first frame update
@@ -138,13 +140,18 @@ public class ShopSystem : MonoBehaviour
             if (shipLevel == 1)
             {
                 currentShipInstance = Instantiate(level2Ship, position, rotation);
+                playerShip = currentShipInstance.GetComponent<PlayerShip>();
+                playerShip.health = 250;
             }
             else if (shipLevel == 2)
             {
                 position += Vector3.up * 1.2f; // Raising the spawn position by 1 unit. Adjust this value as needed.
                 currentShipInstance = Instantiate(level3Ship, position, rotation);
+                playerShip = currentShipInstance.GetComponent<PlayerShip>();
+                playerShip.health = 400;
             }
 
+            Debug.Log(playerShip.health);
             // Re-assign the references for the new ship's components
             player = currentShipInstance.GetComponent<ShipShooting>();
             speed = currentShipInstance.GetComponent<ShipMovement>();
