@@ -42,6 +42,7 @@ public class ShopSystem : MonoBehaviour
 
     public GameObject level1Ship;
     public GameObject level2Ship;
+    public GameObject level3Ship;
     public GameObject currentShipInstance;
 
     Vector3 startPosition = new Vector3(93, 1, 69);
@@ -69,7 +70,6 @@ public class ShopSystem : MonoBehaviour
 
     public void PurchaseFireRateUpgrade()
     {
-        Debug.Log("Upgrade purchased");
         if (CanAffordUpgrade(fireRateCost) && fireRateLevel < 5)
         {
             PlayerCoins.coins -= fireRateCost;
@@ -81,6 +81,7 @@ public class ShopSystem : MonoBehaviour
             UpdateCoinUI();
             UpdateButtonInteractivity();
             UpdateShopTexts();
+            Debug.Log(player.shootCooldown);
         }
     }
 
@@ -125,26 +126,38 @@ public class ShopSystem : MonoBehaviour
         if (CanAffordUpgrade(shipCost) && shipLevel < 3)
         {
             PlayerCoins.coins -= shipCost;
-            
+
+            ShipShooting oldShipShooting = currentShipInstance.GetComponent<ShipShooting>();
+            ShipMovement oldShipMovement = currentShipInstance.GetComponent<ShipMovement>();
+
+            Vector3 position = currentShipInstance.transform.position;
+            Quaternion rotation = currentShipInstance.transform.rotation;
+
+            Destroy(currentShipInstance);
+
             if (shipLevel == 1)
             {
-
-                // ShipShooting oldShipShooting = currentShipInstance.GetComponent<ShipShooting>();
-                // ShipMovement oldShipMovement = currentShipInstance.GetComponent<ShipMovement>();
-
-                Destroy(currentShipInstance);
-
-                currentShipInstance = Instantiate(level2Ship, currentShipInstance.transform.position, currentShipInstance.transform.rotation);
-
-                // ShipShooting newShipShooting = currentShipInstance.GetComponent<ShipShooting>();
-                // ShipMovement newShipMovement = currentShipInstance.GetComponent<ShipMovement>();
-
-                // newShipShooting.damage = oldShipShooting.damage;
-                // newShipShooting.shootCooldown = oldShipShooting.shootCooldown;
-                // newShipMovement.speed = oldShipMovement.speed;
-
-                shipLevel++;
+                currentShipInstance = Instantiate(level2Ship, position, rotation);
             }
+            else if (shipLevel == 2)
+            {
+                position += Vector3.up * 1.2f; // Raising the spawn position by 1 unit. Adjust this value as needed.
+                currentShipInstance = Instantiate(level3Ship, position, rotation);
+            }
+
+            // Re-assign the references for the new ship's components
+            player = currentShipInstance.GetComponent<ShipShooting>();
+            speed = currentShipInstance.GetComponent<ShipMovement>();
+            boostedSpeed = currentShipInstance.GetComponent<ShipMovement>();
+
+            ShipShooting newShipShooting = player;
+            ShipMovement newShipMovement = speed;
+
+            newShipShooting.damage = oldShipShooting.damage;
+            newShipShooting.shootCooldown = oldShipShooting.shootCooldown;
+            newShipMovement.speed = oldShipMovement.speed;
+
+            shipLevel++;
 
             UpdateCoinUI();
             UpdateButtonInteractivity();
