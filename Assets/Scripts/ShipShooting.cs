@@ -13,6 +13,7 @@ public class ShipShooting : MonoBehaviour
     public AudioClip readyToShootSound; // Drag your ready-to-shoot sound here
     public float shootCooldown = 2.0f; // Time between shots
     private bool canShoot = true;
+    public int damage = 35;
 
     void Update()
     {
@@ -28,6 +29,9 @@ public class ShipShooting : MonoBehaviour
 
         // Instantiate bullet and apply force
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+
+        bullet.GetComponent<PlayerBullet>().SetDamage(damage);
+
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -45,7 +49,7 @@ public class ShipShooting : MonoBehaviour
         yield return new WaitForSeconds(shootCooldown - 0.5f); // Wait for 1.5 seconds
 
         // Play ready-to-shoot sound just before next shot is ready
-       audioSource.PlayOneShot(readyToShootSound);
+        audioSource.PlayOneShot(readyToShootSound);
 
         yield return new WaitForSeconds(0.5f); // Wait for additional 0.5 seconds
 

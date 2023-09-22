@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    public int damage = 35; // Damage dealt by the bullet
+    public int damage; // Damage dealt by the bullet
     public GameObject destroyEffect; // Prefab for the destroy effect
     public float lifeTime = 3.0f;
     private float elapsedTime;
@@ -11,6 +11,7 @@ public class PlayerBullet : MonoBehaviour
     {
         elapsedTime = 0.0f;
     }
+
     void Update()
     {
         if (elapsedTime >= lifeTime)
@@ -18,6 +19,11 @@ public class PlayerBullet : MonoBehaviour
             Destroy(this.gameObject);
         }
         elapsedTime += Time.deltaTime;
+    }
+
+    public void SetDamage(int dmg)
+    {
+        damage = dmg;
     }
 
     void OnTriggerEnter(Collider other)

@@ -21,10 +21,9 @@ public class ShopSystem : MonoBehaviour
     public Button upgradeDamage;
     public Button upgradeSpeed;
     public Button upgradeShip;
-    public ShipShooting fireRate;
+    public ShipShooting player;
     public ShipMovement speed;
     public ShipMovement boostedSpeed;
-    public PlayerBullet damage;
 
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI fireRateUpgradeText;
@@ -35,6 +34,7 @@ public class ShopSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(player.damage);
         Debug.Log("Shop initiated");
         UpdateCoinUI();
         UpdateButtonInteractivity();
@@ -61,7 +61,7 @@ public class ShopSystem : MonoBehaviour
             fireRateLevel++;
             
             // Apply the fire rate upgrade logic
-            fireRate.shootCooldown -= 0.25f;
+            player.shootCooldown -= 0.25f;
 
             UpdateCoinUI();
             UpdateButtonInteractivity();
@@ -96,7 +96,7 @@ public class ShopSystem : MonoBehaviour
             damageLevel++;
             
             // Apply the fire rate upgrade logic
-            damage.damage += 20;
+            player.damage += 20;
 
             UpdateCoinUI();
             UpdateButtonInteractivity();
@@ -139,7 +139,7 @@ public class ShopSystem : MonoBehaviour
         // Fire Rate Text
         if (fireRateLevel < 5)
         {
-            float currentFireRateValue = fireRate.shootCooldown;
+            float currentFireRateValue = player.shootCooldown;
             float nextFireRateValue = currentFireRateValue - 0.25f;
             fireRateUpgradeText.text = $"{currentFireRateValue}s > {nextFireRateValue}s";
         }
@@ -163,7 +163,7 @@ public class ShopSystem : MonoBehaviour
         // Damage Text
         if (damageLevel < 5)
         {
-            float currentDamageValue = damage.damage;
+            float currentDamageValue = player.damage;
             float nextDamageValue = currentDamageValue + 20;
             damageUpgradeText.text = $"{currentDamageValue} > {nextDamageValue}";
         }
@@ -175,7 +175,7 @@ public class ShopSystem : MonoBehaviour
         // Ship Text
         if (shipLevel < 5)
         {
-            float currentFireRateValue = fireRate.shootCooldown;
+            float currentFireRateValue = player.shootCooldown;
             float nextFireRateValue = currentFireRateValue - 0.25f;
             fireRateUpgradeText.text = $"{currentFireRateValue}s > {nextFireRateValue}s";
         }

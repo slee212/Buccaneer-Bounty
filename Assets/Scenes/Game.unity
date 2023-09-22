@@ -7092,7 +7092,11 @@ PrefabInstance:
     - target: {fileID: 5537067357491029929, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
       propertyPath: damage
       value: 
-      objectReference: {fileID: 5467078765464927820, guid: 19f7777dd788a6547a054fb6b76a4041, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537067357491029929, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1134365087}
     - target: {fileID: 5537067357491029929, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
       propertyPath: coinText
       value: 
