@@ -6,6 +6,8 @@ public class NewBehaviourScript : MonoBehaviour
 {
     public GameObject shopUI;
     public PauseMenu pause;
+    public ShopType shopType;
+    public ShopSystem shopSystem;
     private bool isPlayerInRange = false;
 
 
@@ -33,7 +35,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             isPlayerInRange = true;
             // shopPromptUI.SetActive(true);
-            
+            shopSystem.SetCurrentShopType(shopType);
         }
     }
 
