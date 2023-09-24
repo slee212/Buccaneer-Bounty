@@ -179,7 +179,7 @@ public class ShopSystem : MonoBehaviour
 
     public void PurchaseRepair()
     {
-        if (CanAffordUpgrade(repairCost) && shipLevel == 1)
+        if (CanAffordUpgrade(repairCost))
         {
             Debug.Log(shipLevel);
             PlayerCoins.coins -= repairCost;
