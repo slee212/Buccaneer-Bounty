@@ -23,11 +23,13 @@ public class ShopSystem : MonoBehaviour
     public int speedCost = 1;
     public int damageCost = 2;
     public int shipCost = 3;
+    public int repairCost = 1;
 
     public Button upgradeFireRate;
     public Button upgradeDamage;
     public Button upgradeSpeed;
     public Button upgradeShip;
+    public Button repairShip;
     public ShipShooting player;
     public ShipMovement speed;
     public ShipMovement boostedSpeed;
@@ -52,8 +54,7 @@ public class ShopSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        Debug.Log(player.damage);
-        Debug.Log("Shop initiated");
+        Debug.Log(playerShip);
         UpdateCoinUI();
         UpdateButtonInteractivity();
         UpdateShopTexts();
@@ -142,6 +143,8 @@ public class ShopSystem : MonoBehaviour
                 currentShipInstance = Instantiate(level2Ship, position, rotation);
                 playerShip = currentShipInstance.GetComponent<PlayerShip>();
                 playerShip.health = 250;
+                playerShip.maxHealth = 250;
+                playerShip.UpdateHealthbar();
             }
             else if (shipLevel == 2)
             {
@@ -149,6 +152,8 @@ public class ShopSystem : MonoBehaviour
                 currentShipInstance = Instantiate(level3Ship, position, rotation);
                 playerShip = currentShipInstance.GetComponent<PlayerShip>();
                 playerShip.health = 400;
+                playerShip.maxHealth = 400;
+                playerShip.UpdateHealthbar();
             }
 
             Debug.Log(playerShip.health);
@@ -171,6 +176,20 @@ public class ShopSystem : MonoBehaviour
         }
     }
 
+    public void PurchaseRepair()
+    {
+        if (CanAffordUpgrade(repairCost) && shipLevel == 1)
+        {
+            Debug.Log(shipLevel);
+            PlayerCoins.coins -= repairCost;
+            playerShip = currentShipInstance.GetComponent<PlayerShip>();
+            playerShip.health = playerShip.maxHealth;
+            playerShip.UpdateHealthbar();
+            UpdateCoinUI();
+            UpdateButtonInteractivity();
+        }
+    }
+
     // Similar methods for each upgrade
 
     public void UpdateCoinUI()
@@ -183,6 +202,7 @@ public class ShopSystem : MonoBehaviour
         upgradeFireRate.interactable = CanAffordUpgrade(fireRateCost) && fireRateLevel < 5;
         upgradeSpeed.interactable = CanAffordUpgrade(speedCost) && speedLevel < 5;
         upgradeDamage.interactable = CanAffordUpgrade(damageCost) && damageLevel < 5;
+        repairShip.interactable = CanAffordUpgrade(repairCost) && playerShip.health < playerShip.maxHealth;
 
         switch (currentShopType)
         {
@@ -237,15 +257,14 @@ public class ShopSystem : MonoBehaviour
         }
 
         // Ship Text
-        if (shipLevel < 5)
+        if (shipLevel < 3)
         {
-            float currentFireRateValue = player.shootCooldown;
-            float nextFireRateValue = currentFireRateValue - 0.25f;
-            fireRateUpgradeText.text = $"{currentFireRateValue}s > {nextFireRateValue}s";
+            float nextShipLevel = shipLevel + 1;
+            shipUpgradeText.text = $"Lvl {shipLevel} > Lvl {nextShipLevel}";
         }
         else
         {
-            fireRateUpgradeText.text = "Max Level";
+            shipUpgradeText.text = "Max Level";
         }
     }
 

@@ -13,6 +13,8 @@ public class PlayerShip : MonoBehaviour
     {
         maxHealth = health;
 
+        healthbar = GameObject.Find("healthbar").GetComponent<Image>();
+
         if (healthbar != null)
         {
             originalHealthBarWidth = healthbar.rectTransform.rect.width;
@@ -28,27 +30,28 @@ public class PlayerShip : MonoBehaviour
     {
         health -= damage;
         Debug.Log("Player hit! Current health: " + health);
-
-        if (healthbar != null)
-        {
-            float currentHealthPercentage = (float)health / maxHealth;
-            float newWidth = originalHealthBarWidth * currentHealthPercentage;
-            float currentHeight = healthbar.rectTransform.rect.height;
-            healthbar.rectTransform.sizeDelta = new Vector2(newWidth, currentHeight);
-            if (currentHealthPercentage <= 0.25f)
-            {
-                healthbar.color = new Color(255f / 255f, 88f / 255f, 94f / 255f, 1f); // Red
-            } else
-            {
-                healthbar.color = new Color(134f / 255f, 255f / 255f, 141f / 255f, 1f); // Green
-            }
-        }
+        UpdateHealthbar();
 
         if (health <= 0)
         {
             Debug.Log("Player destroyed!");
             Destroy(gameObject);
             LoadGame("GameOver"); // Load the "GameOver" scene
+        }
+    }
+
+    public void UpdateHealthbar()
+    {
+        float currentHealthPercentage = (float)health / maxHealth;
+        float newWidth = originalHealthBarWidth * currentHealthPercentage;
+        float currentHeight = healthbar.rectTransform.rect.height;
+        healthbar.rectTransform.sizeDelta = new Vector2(newWidth, currentHeight);
+        if (currentHealthPercentage <= 0.25f)
+        {
+            healthbar.color = new Color(255f / 255f, 88f / 255f, 94f / 255f, 1f); // Red
+        } else
+        {
+            healthbar.color = new Color(134f / 255f, 255f / 255f, 141f / 255f, 1f); // Green
         }
     }
 }
