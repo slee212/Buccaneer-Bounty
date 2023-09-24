@@ -8,6 +8,7 @@ public class PlayerShip : MonoBehaviour
     private float originalHealthBarWidth;
     public int health = 100;
     public int maxHealth;
+    public const float MaxHealthbarWidth = 67.09f;
 
     void Start()
     {
@@ -42,8 +43,13 @@ public class PlayerShip : MonoBehaviour
 
     public void UpdateHealthbar()
     {
+        if (healthbar == null)
+        {
+            healthbar = GameObject.Find("healthbar").GetComponent<Image>();
+            originalHealthBarWidth = healthbar.rectTransform.rect.width;
+        }
         float currentHealthPercentage = (float)health / maxHealth;
-        float newWidth = originalHealthBarWidth * currentHealthPercentage;
+        float newWidth = MaxHealthbarWidth * currentHealthPercentage;
         float currentHeight = healthbar.rectTransform.rect.height;
         healthbar.rectTransform.sizeDelta = new Vector2(newWidth, currentHeight);
         if (currentHealthPercentage <= 0.25f)

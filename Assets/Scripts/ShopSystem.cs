@@ -170,6 +170,7 @@ public class ShopSystem : MonoBehaviour
             newShipMovement.speed = oldShipMovement.speed;
 
             shipLevel++;
+            Debug.Log("Ship level increased" + shipLevel);
 
             UpdateCoinUI();
             UpdateButtonInteractivity();
