@@ -21,6 +21,7 @@ public class EnemyAIShip : MonoBehaviour
     private bool canShoot = true;
     public GameObject bulletPrefab;
     public Transform[] bulletSpawnPoints;
+    private Transform aimTarget;
     private Transform player;
     private int currentWaypoint = 0;
 
@@ -29,6 +30,7 @@ public class EnemyAIShip : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        aimTarget = GameObject.FindGameObjectWithTag("Aim").transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
         if (navMeshAgent == null)
         {
@@ -59,6 +61,38 @@ public class EnemyAIShip : MonoBehaviour
 
     void Update()
     {
+    if (player == null)
+    {
+        Debug.Log("Player reference is null. Updating...");
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (player != null)
+        {
+            Debug.Log("Player reference updated.");
+        }
+        else
+        {
+            Debug.Log("Failed to update player reference.");
+        }
+
+        return;
+    }
+        if (aimTarget == null)
+    {
+        Debug.Log("Player reference is null. Updating...");
+        aimTarget = GameObject.FindGameObjectWithTag("Aim").transform;
+
+        if (aimTarget != null)
+        {
+            Debug.Log("Player reference updated.");
+        }
+        else
+        {
+            Debug.Log("Failed to update aimTarget reference.");
+        }
+
+        return;
+    }
         if (navMeshAgent == null || player == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -66,15 +100,13 @@ public class EnemyAIShip : MonoBehaviour
 
         if (distanceToPlayer <= shootDistance)
         {
-            AimAtPlayer();  // Add this line to aim at the player
+            AimAtAimTarget();
             Shoot();
             navMeshAgent.isStopped = true;
         }
         else if (distanceToPlayer <= chaseDistance)
         {
             navMeshAgent.isStopped = false;
-
-            currentSpeed = boostedSpeed;
             ChasePlayer(currentSpeed);
         }
         else
@@ -83,11 +115,14 @@ public class EnemyAIShip : MonoBehaviour
         }
     }
 
-    void AimAtPlayer()
+    void AimAtAimTarget()
     {
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxRotationSpeed * Time.deltaTime);
+        if (aimTarget != null)
+        {
+            Vector3 directionToAimTarget = (aimTarget.position - transform.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(directionToAimTarget);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxRotationSpeed * Time.deltaTime);
+        }
     }
 
     void Patrol(float currentSpeed)
