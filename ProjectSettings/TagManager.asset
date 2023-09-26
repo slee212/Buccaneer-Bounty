@@ -9,6 +9,7 @@ TagManager:
   - Terrain
   - PlayerBullet
   - EnemyBullet
+  - Box
   layers:
   - Default
   - TransparentFX
