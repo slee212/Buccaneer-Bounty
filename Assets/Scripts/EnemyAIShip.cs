@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI; // Import the AI namespace
+using UnityEngine.UI;
 
 public class EnemyAIShip : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class EnemyAIShip : MonoBehaviour
     public float chaseDistance = 15.0f;
     public float shootDistance = 5.0f;
     public int health = 100;
+    public int maxHealth;
     public float bulletSpeed = 20.0f;
     public GameObject explosionEffect;
     public AudioSource audioSource;
@@ -24,26 +26,53 @@ public class EnemyAIShip : MonoBehaviour
     private Transform player;
     private int currentWaypoint = 0;
 
+    public GameObject healthBarPrefab;
+    private HealthBar healthBar;
+
     private NavMeshAgent navMeshAgent; // Declare NavMeshAgent variable
 
     void Start()
     {
+        maxHealth = health;
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
         if (navMeshAgent == null)
         {
             Debug.LogError("NavMeshAgent component not found.");
         }
+
+        // Instantiate the health bar prefab
+        GameObject healthBarObject = Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
+        healthBarObject.transform.SetParent(transform); // set the enemy as parent
+
+        // Position and scale adjustment
+        healthBarObject.transform.localPosition = new Vector3(0, 2, 0); // local offset
+        healthBarObject.transform.localScale = new Vector3(1f, 1f, 1f); // adjust the scale
+
+        // Find the main camera and assign it to the Canvas' worldCamera property
+        Canvas canvas = healthBarObject.GetComponentInChildren<Canvas>();
+        if (canvas != null)
+        {
+            canvas.worldCamera = Camera.main;
+            canvas.sortingLayerName = "UI"; // or any layer that is rendered on top
+            canvas.gameObject.AddComponent<CanvasScaler>();
+            canvas.gameObject.AddComponent<GraphicRaycaster>();
+        }
+
+        // Get the HealthBar component from the instantiated health bar object
+        healthBar = healthBarObject.GetComponent<HealthBar>();
     }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
+        healthBar.UpdateHealthBar(health, maxHealth);
         Debug.Log("Enemy hit! Current health: " + health);  // Log when hit
 
         if (health <= 0)
         {                
-
+            Destroy(healthBar.gameObject);
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null)
             {
