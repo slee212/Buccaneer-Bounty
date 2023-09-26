@@ -911,6 +911,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1203008370830187413, guid: ea77e4dea4877504e9564fdf12b58721, type: 3}
+      propertyPath: healthBarPrefab
+      value: 
+      objectReference: {fileID: 734105912580780292, guid: c50ccf8dc91b9744b97d70faadd9beb8, type: 3}
+    - target: {fileID: 1203008370830187413, guid: ea77e4dea4877504e9564fdf12b58721, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 1461962163}
@@ -10756,9 +10760,17 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 4561340752050418069, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
+      propertyPath: m_TagString
+      value: MainCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 4812610427805409227, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970098525673494756, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
+      propertyPath: m_TagString
+      value: SecondaryCamera
       objectReference: {fileID: 0}
     - target: {fileID: 5009368320795840766, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
       propertyPath: m_Name
