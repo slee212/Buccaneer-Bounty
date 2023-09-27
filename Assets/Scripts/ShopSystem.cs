@@ -54,7 +54,6 @@ public class ShopSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        Debug.Log(playerShip);
         UpdateCoinUI();
         UpdateButtonInteractivity();
         UpdateShopTexts();
@@ -173,7 +172,7 @@ public class ShopSystem : MonoBehaviour
             Debug.Log("Ship level increased" + shipLevel);
 
             UpdateCoinUI();
-            UpdateButtonInteractivity();
+            UpdateButtonInteractivity();            
         }
     }
 

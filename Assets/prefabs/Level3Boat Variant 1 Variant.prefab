@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level3Boat Variant 1 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 257406153966459882, guid: d8e0e295d7e2c4143a3448860a4c09cf, type: 3}
+      propertyPath: m_TagString
+      value: SecondaryCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 609139177364145040, guid: d8e0e295d7e2c4143a3448860a4c09cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 151.63393
