@@ -12,6 +12,7 @@ TagManager:
   - Box
   - Aim
   - SecondaryCamera
+  - coinCounter
   layers:
   - Default
   - TransparentFX

@@ -9281,6 +9281,10 @@ PrefabInstance:
       propertyPath: m_PlaneDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1742939656416901184, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
+      propertyPath: m_TagString
+      value: coinCounter
+      objectReference: {fileID: 0}
     - target: {fileID: 2058284041151639161, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 21.59999
