@@ -11,6 +11,7 @@ TagManager:
   - EnemyBullet
   - Box
   - Aim
+  - SecondaryCamera
   layers:
   - Default
   - TransparentFX
