@@ -19,8 +19,10 @@ public class ShipMovement : MonoBehaviour
     private float currentEmissionRate = 0f;
 
     private Rigidbody rb;
+    public PlayerShip playerShip;
     public float bounceForce = 3f;
     public float islandHeightThreshold = 0.7f;
+    public int islandDamage = 5;
 
     private float lastBounceTime = 0f;
     private float bounceCooldown = 1f;
@@ -61,6 +63,8 @@ public class ShipMovement : MonoBehaviour
             mainCamera.GetComponent<AudioListener>().enabled = false;
             secondaryCamera.GetComponent<AudioListener>().enabled = true;
         }
+
+        playerShip = GetComponent<PlayerShip>();
     }
 
     void Update()
@@ -121,6 +125,8 @@ public class ShipMovement : MonoBehaviour
 
             // Apply a force to simulate the bounce
             rb.AddForce(bounceDirection * bounceForce, ForceMode.Impulse);
+
+            playerShip.TakeDamage(islandDamage);
         }
 
         mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, targetFOV, fovTransitionSpeed * Time.deltaTime);
