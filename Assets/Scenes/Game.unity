@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.39130157, g: 0.53645676, b: 0.5284201, a: 1}
+  m_IndirectSpecularColor: {r: 0.39129877, g: 0.53646505, b: 0.52839154, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5083,7 +5083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopUI: {fileID: 1001766561}
-  pause: {fileID: 7202743366717365125}
+  pause: {fileID: 1154510801}
   shopType: 0
   shopSystem: {fileID: 1001766563}
 --- !u!1 &828719076
@@ -6868,7 +6868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopUI: {fileID: 1001766561}
-  pause: {fileID: 7202743366717365125}
+  pause: {fileID: 0}
   shopType: 2
   shopSystem: {fileID: 1001766563}
 --- !u!65 &1033520105
@@ -7261,6 +7261,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
+--- !u!1 &1086040628 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3428345896117038794, guid: fdee32ba6b022d3458b6ac5e9cfaad7f, type: 3}
+  m_PrefabInstance: {fileID: 1154510799}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1088513241 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 669123980209786023, guid: ea77e4dea4877504e9564fdf12b58721, type: 3}
@@ -7826,13 +7831,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3428345896117038794, guid: fdee32ba6b022d3458b6ac5e9cfaad7f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1154510801}
   m_SourcePrefab: {fileID: 100100000, guid: fdee32ba6b022d3458b6ac5e9cfaad7f, type: 3}
 --- !u!4 &1154510800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2654940979849147504, guid: fdee32ba6b022d3458b6ac5e9cfaad7f, type: 3}
   m_PrefabInstance: {fileID: 1154510799}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1154510801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086040628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49ab6395ed0d3e40bf747e00b0e527e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuUI: {fileID: 1082481232}
 --- !u!1 &1191887383
 GameObject:
   m_ObjectHideFlags: 0
@@ -11600,7 +11621,7 @@ PrefabInstance:
     - target: {fileID: 2274281262961148677, guid: 3cea41012d938904290006214057a090, type: 3}
       propertyPath: pause
       value: 
-      objectReference: {fileID: 7202743366717365125}
+      objectReference: {fileID: 0}
     - target: {fileID: 2274281262961148677, guid: 3cea41012d938904290006214057a090, type: 3}
       propertyPath: shopUI
       value: 
@@ -12058,7 +12079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopUI: {fileID: 1001766561}
-  pause: {fileID: 7202743366717365125}
+  pause: {fileID: 0}
   shopType: 1
   shopSystem: {fileID: 1001766563}
 --- !u!65 &1919629000
@@ -13897,17 +13918,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c087fa99343bb4cab8de87166f40b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7202743366717365125 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1664538247554155423, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
-  m_PrefabInstance: {fileID: 8244551906309433605}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134365075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c49ab6395ed0d3e40bf747e00b0e527e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8244551906309433605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13958,7 +13968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5678767958572255812, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2536
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 5678767958572255812, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13966,7 +13976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5678767958572255812, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 160.8
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 5678767958572255812, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14000,7 +14010,8 @@ PrefabInstance:
       propertyPath: coinText
       value: 
       objectReference: {fileID: 775154667}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1664538247554155423, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

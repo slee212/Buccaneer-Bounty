@@ -253,7 +253,7 @@ public class ShopSystem : MonoBehaviour
         }
         else
         {
-            fireRateUpgradeText.text = "Max Level";
+            damageUpgradeText.text = "Max Level";
         }
 
         // Ship Text
