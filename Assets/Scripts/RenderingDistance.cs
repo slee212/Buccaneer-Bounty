@@ -6,15 +6,6 @@ public class ClippingPlaneController : MonoBehaviour
     public Slider RenderDistance;
     public Camera Main; // Reference to the camera you want to control
 
-    private void Start()
-    {
-        // Add a listener to the slider's value changed event
-        RenderDistance.onValueChanged.AddListener(UpdateClippingPlanes);
-
-        // Set the initial clipping planes based on the slider's starting value
-        UpdateClippingPlanes(RenderDistance.value);
-    }
-
     // Update the clipping planes based on the slider value
     private void UpdateClippingPlanes(float value)
     {
@@ -22,5 +13,22 @@ public class ClippingPlaneController : MonoBehaviour
 
         // Update the camera's clipping planes
         Main.farClipPlane = farClipPlane;
+    }
+
+    private void Start()
+    {
+        // Check if RenderDistance is assigned before using it.
+        if (RenderDistance != null)
+        {
+            // Add a listener to the slider's value changed event
+            RenderDistance.onValueChanged.AddListener(UpdateClippingPlanes);
+
+            // Set the initial clipping planes based on the slider's starting value
+            UpdateClippingPlanes(RenderDistance.value);
+        }
+        else
+        {
+            Debug.LogError("RenderDistance is not assigned. Please assign it in the Inspector.");
+        }
     }
 }
