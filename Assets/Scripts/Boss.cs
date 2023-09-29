@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BossAIShip : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class BossAIShip : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
+    public void LoadGame(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -41,6 +47,8 @@ public class BossAIShip : MonoBehaviour
                 if (player) player.AddCoin();
             }
             Destroy(gameObject);
+
+            LoadGame("Victory"); // Load the "GameOver" scene
         }
     }
 
