@@ -13,6 +13,7 @@ TagManager:
   - Aim
   - SecondaryCamera
   - coinCounter
+  - Boss
   layers:
   - Default
   - TransparentFX

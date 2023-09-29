@@ -37,7 +37,15 @@ public class PlayerBullet : MonoBehaviour
                 enemy.TakeDamage(damage);
             }
             RunDestroyEffect();
+            BossAIShip boss = other.gameObject.GetComponent<BossAIShip>();
+            if (boss != null)
+            {
+                Debug.Log("Bullet hit boss!"); 
+                boss.TakeDamage(damage);
+            }
+            RunDestroyEffect();
         }
+
         if (other.gameObject.tag == "Player")
         {
             Debug.Log("Enemy bullet hit player!");  // Log when bullet hits player
