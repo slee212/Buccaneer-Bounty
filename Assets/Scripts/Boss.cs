@@ -18,8 +18,8 @@ public class BossAIShip : MonoBehaviour
     private Transform player;
     private int currentWaypoint = 0, shootPhase = 0;
 
-    public float spinSpeed = 10f;  // Degrees per frame
-    public int bulletsPerRevolution = 36;  // Number of bullets for a full spin
+    public float spinSpeed = 10f; 
+    public int bulletsPerRevolution = 36;
 
     private NavMeshAgent navMeshAgent;
 

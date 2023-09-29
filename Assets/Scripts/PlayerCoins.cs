@@ -29,7 +29,7 @@ public class PlayerCoins : MonoBehaviour
     public void AddCoin()
     {
         Debug.Log("AddCoin method called!");
-        coins += 1;
+        coins += 2;
         Debug.Log("Coin collected! Current coins: " + coins);
         UpdateCoinUI();
     }
