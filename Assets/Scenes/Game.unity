@@ -12616,6 +12616,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1305177212613410721, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 556794935011b2f48b374674bc1ecc7b, type: 3}
     - target: {fileID: 1380517571780795396, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -61.8
@@ -12651,6 +12655,18 @@ PrefabInstance:
     - target: {fileID: 4035977308540494412, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210298783270900829, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259662370447073650, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 882.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259662370447073650, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 457.9
       objectReference: {fileID: 0}
     - target: {fileID: 4409352042868964059, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -12832,6 +12848,14 @@ PrefabInstance:
       propertyPath: fireRateUpgradeText
       value: 
       objectReference: {fileID: 2095785313}
+    - target: {fileID: 5711347627863631981, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 805.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711347627863631981, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 481.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6085904843827516700, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 517.3
