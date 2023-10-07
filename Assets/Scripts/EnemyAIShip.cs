@@ -5,6 +5,17 @@ using UnityEngine.UI;
 
 public class EnemyAIShip : MonoBehaviour
 {
+    public enum FSMState
+    {
+        None,
+        Patrol,
+        Chase,
+        Shoot,
+        Dead,
+    }
+
+    public FSMState curState;
+
     public Transform[] waypoints;
     public float speed = 5.0f;
     public float boostedSpeed = 10.0f;
@@ -34,6 +45,8 @@ public class EnemyAIShip : MonoBehaviour
 
     void Start()
     {
+        curState = FSMState.Patrol;
+
         maxHealth = health;
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -66,81 +79,104 @@ public class EnemyAIShip : MonoBehaviour
         healthBar = healthBarObject.GetComponent<HealthBar>();
     }
 
+    void Update()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+
+            return;
+        }
+
+        if (aimTarget == null)
+        {
+            aimTarget = GameObject.FindGameObjectWithTag("Aim").transform;
+
+            return;
+        }
+
+        if (navMeshAgent == null || player == null) return;
+
+        switch (curState)
+        {
+            case FSMState.Patrol: UpdatePatrolState(); break;
+            case FSMState.Chase: UpdateChaseState(); break;
+            case FSMState.Shoot: UpdateShootState(); break;
+            case FSMState.Dead: UpdateDeadState(); break;
+        }
+
+        if (health <= 0) {
+            curState = FSMState.Dead;
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
         healthBar.UpdateHealthBar(health, maxHealth);
-        Debug.Log("Enemy hit! Current health: " + health);  // Log when hit
-
-        if (health <= 0)
-        {                
-            Destroy(healthBar.gameObject);
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-            if (playerObj != null)
-            {
-                PlayerCoins player = playerObj.GetComponent<PlayerCoins>();
-                if (player != null)
-                {
-                    player.AddCoin();  // Add a coin to the player
-                }
-            }
-            Destroy(gameObject); // Destroy the enemy GameObject
-        }
     }
 
-    void Update()
+    protected void UpdatePatrolState()
     {
-    if (player == null)
-    {
-        Debug.Log("Player reference is null. Updating...");
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        if (player != null)
-        {
-            Debug.Log("Player reference updated.");
-        }
-        else
-        {
-            Debug.Log("Failed to update player reference.");
-        }
-
-        return;
-    }
-        if (aimTarget == null)
-    {
-        Debug.Log("Player reference is null. Updating...");
-        aimTarget = GameObject.FindGameObjectWithTag("Aim").transform;
-
-        if (aimTarget != null)
-        {
-            Debug.Log("Player reference updated.");
-        }
-        else
-        {
-            Debug.Log("Failed to update aimTarget reference.");
-        }
-
-        return;
-    }
-        if (navMeshAgent == null || player == null) return;
-
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        float currentSpeed = speed;
+
+        Vector3 target = waypoints[currentWaypoint].position;
+        navMeshAgent.SetDestination(target);
+        navMeshAgent.speed = speed;
+
+        if (Vector3.Distance(transform.position, target) < patrolDistance)
+        {
+            currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
+        }
+
+        if (distanceToPlayer <= chaseDistance)
+        {
+            curState = FSMState.Chase;
+        }
+
+        if (health <= 0) {
+            curState = FSMState.Dead;
+        }
+    }
+
+    protected void UpdateChaseState()
+    {
+        Debug.Log("Chase State");
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position); 
+        
+        navMeshAgent.isStopped = false;
+        navMeshAgent.SetDestination(player.position);
+        navMeshAgent.speed = speed;
 
         if (distanceToPlayer <= shootDistance)
         {
-            AimAtAimTarget();
-            Shoot();
-            navMeshAgent.isStopped = true;
+            curState = FSMState.Shoot;
         }
-        else if (distanceToPlayer <= chaseDistance)
+
+        if (distanceToPlayer > chaseDistance)
         {
-            navMeshAgent.isStopped = false;
-            ChasePlayer(currentSpeed);
+            curState = FSMState.Patrol;
         }
-        else
+
+        if (health <= 0) {
+            curState = FSMState.Dead;
+        }
+    }
+
+    protected void UpdateShootState()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        AimAtAimTarget();
+        Shoot();
+        navMeshAgent.isStopped = true;
+
+        if (distanceToPlayer > shootDistance && distanceToPlayer <= chaseDistance)
         {
-            Patrol(currentSpeed);
+            curState = FSMState.Chase;
+        }
+
+        if (health <= 0) {
+            curState = FSMState.Dead;
         }
     }
 
@@ -154,22 +190,19 @@ public class EnemyAIShip : MonoBehaviour
         }
     }
 
-    void Patrol(float currentSpeed)
+    protected void UpdateDeadState()
     {
-        Vector3 target = waypoints[currentWaypoint].position;
-        navMeshAgent.SetDestination(target);
-        navMeshAgent.speed = currentSpeed;
-
-        if (Vector3.Distance(transform.position, target) < patrolDistance)
-        {
-            currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
-        }
-    }
-
-    void ChasePlayer(float currentSpeed)
-    {
-        navMeshAgent.SetDestination(player.position);
-        navMeshAgent.speed = currentSpeed;
+        Destroy(healthBar.gameObject);
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                PlayerCoins player = playerObj.GetComponent<PlayerCoins>();
+                if (player != null)
+                {
+                    player.AddCoin();  // Add a coin to the player
+                }
+            }
+        Destroy(gameObject); // Destroy the enemy GameObject
     }
 
     void Shoot()

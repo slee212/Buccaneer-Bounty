@@ -6,6 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class BossAIShip : MonoBehaviour
 {
+    public enum FSMState
+    {
+        None,
+        Patrol,
+        Chase,
+        Shoot,
+        Dead,
+    }
+
+    public FSMState curState;
+
     public Transform[] waypoints;
     public float speed = 5.0f;
     public float boostedSpeed = 10.0f;
@@ -41,6 +52,8 @@ public class BossAIShip : MonoBehaviour
 
     void Start()
     {
+        curState = FSMState.Patrol;
+
         maxHealth = health;
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -73,109 +86,34 @@ public class BossAIShip : MonoBehaviour
         healthBar = healthBarObject.GetComponent<HealthBar>();
     }
 
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        healthBar.UpdateHealthBar(health, maxHealth);
-        Debug.Log("Enemy hit! Current health: " + health);  // Log when hit
-
-        if (health <= 0)
-        {                
-            Destroy(healthBar.gameObject);
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-            if (playerObj != null)
-            {
-                PlayerCoins player = playerObj.GetComponent<PlayerCoins>();
-                if (player != null)
-                {
-                    player.AddCoin();  // Add a coin to the player
-                }
-            }
-            Destroy(gameObject); // Destroy the enemy GameObject
-            LoadGame("Victory"); // Load the "GameOver" scene
-
-
-        }
-    }
-    public void LoadGame(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
     void Update()
     {
-    if (player == null)
-    {
-        Debug.Log("Player reference is null. Updating...");
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        if (player != null)
-        {
-            Debug.Log("Player reference updated.");
-        }
-        else
-        {
-            Debug.Log("Failed to update player reference.");
+            return;
         }
 
-        return;
-    }
         if (aimTarget == null)
-    {
-        Debug.Log("Player reference is null. Updating...");
-        aimTarget = GameObject.FindGameObjectWithTag("Aim").transform;
+        {
+            aimTarget = GameObject.FindGameObjectWithTag("Aim").transform;
 
-        if (aimTarget != null)
-        {
-            Debug.Log("Player reference updated.");
-        }
-        else
-        {
-            Debug.Log("Failed to update aimTarget reference.");
+            return;
         }
 
-        return;
-    }
         if (navMeshAgent == null || player == null) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        float currentSpeed = speed;
-
-        if (distanceToPlayer <= shootDistance)
+        switch (curState)
         {
-            AimAtAimTarget();
-            Shoot();
-            navMeshAgent.isStopped = true;
+            case FSMState.Patrol: UpdatePatrolState(); break;
+            case FSMState.Chase: UpdateChaseState(); break;
+            case FSMState.Shoot: UpdateShootState(); break;
+            case FSMState.Dead: UpdateDeadState(); break;
         }
-        else if (distanceToPlayer <= chaseDistance)
-        {
-            navMeshAgent.isStopped = false;
-            if (!bossMusic.isPlaying && bossMusic.time == 0)
-            {
-                bossMusic.Play();
-            } 
-            else
-            {
-                bossMusic.UnPause();
-            }
 
-            backgroundMusic.Pause();
-
-            ChasePlayer(currentSpeed);
-        }
-        else
-        {
-            if (!backgroundMusic.isPlaying && backgroundMusic.time == 0)
-            {
-                backgroundMusic.Play();
-            }
-            else
-            {
-                backgroundMusic.UnPause(); 
-            }
-
-            bossMusic.Pause();
-
-            Patrol(currentSpeed);
+        if (health <= 0) {
+            curState = FSMState.Dead;
         }
     }
 
@@ -189,22 +127,107 @@ public class BossAIShip : MonoBehaviour
         }
     }
 
-    void Patrol(float currentSpeed)
+    protected void UpdatePatrolState()
     {
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
         Vector3 target = waypoints[currentWaypoint].position;
         navMeshAgent.SetDestination(target);
-        navMeshAgent.speed = currentSpeed;
+        navMeshAgent.speed = speed;
 
         if (Vector3.Distance(transform.position, target) < patrolDistance)
         {
             currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
         }
+
+        if (distanceToPlayer <= chaseDistance)
+        {
+            curState = FSMState.Chase;
+        }
+
+        if (health <= 0) {
+            curState = FSMState.Dead;
+        }
     }
 
-    void ChasePlayer(float currentSpeed)
+    protected void UpdateChaseState()
     {
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(player.position);
-        navMeshAgent.speed = currentSpeed;
+        navMeshAgent.speed = speed;
+
+        
+        if (!bossMusic.isPlaying && bossMusic.time == 0)
+        {
+            bossMusic.Play();
+        } 
+        else
+        {
+            bossMusic.UnPause();
+        }
+
+        backgroundMusic.Pause();
+
+        if (distanceToPlayer <= shootDistance)
+        {
+            curState = FSMState.Shoot;
+        }
+
+        if (distanceToPlayer > chaseDistance)
+        {
+            curState = FSMState.Patrol;
+        }
+
+        if (health <= 0) {
+            curState = FSMState.Dead;
+        }
+    }
+
+    protected void UpdateShootState()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        
+        AimAtAimTarget();
+        Shoot();
+        navMeshAgent.isStopped = true;
+
+        if (distanceToPlayer > shootDistance && distanceToPlayer <= chaseDistance)
+        {
+            curState = FSMState.Chase;
+        }
+
+        if (health <= 0) {
+            curState = FSMState.Dead;
+        }
+    }
+
+    protected void UpdateDeadState()
+    {
+        Destroy(healthBar.gameObject);
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            PlayerCoins player = playerObj.GetComponent<PlayerCoins>();
+            if (player != null)
+            {
+                player.AddCoin();  // Add a coin to the player
+            }
+        }
+        Destroy(gameObject); // Destroy the enemy GameObject
+        LoadGame("Victory"); // Load the "GameOver" scene
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        healthBar.UpdateHealthBar(health, maxHealth);
+    }
+    
+    public void LoadGame(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 
     void Shoot()
@@ -214,6 +237,7 @@ public class BossAIShip : MonoBehaviour
         if (shootPhase % 3 == 0) StartCoroutine(SpecialSpinShoot());
         else StartCoroutine(ShootCoroutine());
     }
+
     IEnumerator SpecialSpinShoot()
     {
         canShoot = false;
@@ -241,6 +265,7 @@ public class BossAIShip : MonoBehaviour
         yield return new WaitForSeconds(shootCooldown);
         canShoot = true;
     }
+
     void InstantiateBullet(Transform sp)
     {
         GameObject bullet = Instantiate(bulletPrefab, sp.position, sp.rotation);
@@ -251,6 +276,7 @@ public class BossAIShip : MonoBehaviour
         Destroy(explosion, 2.0f);
         audioSource.PlayOneShot(explosionSound);
     }
+
     IEnumerator ShootCoroutine()
     {
         canShoot = false;
