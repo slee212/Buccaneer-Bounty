@@ -36,6 +36,9 @@ public class BossAIShip : MonoBehaviour
 
     private NavMeshAgent navMeshAgent; // Declare NavMeshAgent variable
 
+    public AudioSource backgroundMusic;
+    public AudioSource bossMusic;
+
     void Start()
     {
         maxHealth = health;
@@ -146,10 +149,32 @@ public class BossAIShip : MonoBehaviour
         else if (distanceToPlayer <= chaseDistance)
         {
             navMeshAgent.isStopped = false;
+            if (!bossMusic.isPlaying && bossMusic.time == 0)
+            {
+                bossMusic.Play();
+            } 
+            else
+            {
+                bossMusic.UnPause();
+            }
+
+            backgroundMusic.Pause();
+
             ChasePlayer(currentSpeed);
         }
         else
         {
+            if (!backgroundMusic.isPlaying && backgroundMusic.time == 0)
+            {
+                backgroundMusic.Play();
+            }
+            else
+            {
+                backgroundMusic.UnPause(); 
+            }
+
+            bossMusic.Pause();
+
             Patrol(currentSpeed);
         }
     }
@@ -258,8 +283,3 @@ public class BossAIShip : MonoBehaviour
         canShoot = true;
     }
 }
-
-
-
-
-
