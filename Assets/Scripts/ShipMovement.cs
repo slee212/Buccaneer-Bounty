@@ -34,14 +34,15 @@ public class ShipMovement : MonoBehaviour
 
     public ParticleSystem waterSplashEffect; // Drag your water splash effect here
     private ParticleSystem.MainModule mainModule;
-
+    public float slowRotationSpeed = 70.0f;  // New variable for slower rotation speed
+    private float currentRotationSpeed;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         mainCamera.enabled = true;
         secondaryCamera.enabled = false;
         mainCamera.fieldOfView = normalFOV;
-
+        currentRotationSpeed = rotationSpeed;
 
         // Initialize emission module for wind effect
         emissionModule = windEffect.emission;
@@ -161,17 +162,27 @@ public class ShipMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.up, -currentRotationSpeed * Time.deltaTime);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.up, currentRotationSpeed * Time.deltaTime);
         }
 
         if (Input.GetKeyDown(KeyCode.V))
         {
             mainCamera.enabled = !mainCamera.enabled;
             secondaryCamera.enabled = !secondaryCamera.enabled;
+
+            // Update the rotation speed based on the active camera
+            if (mainCamera.enabled)
+            {
+                currentRotationSpeed = rotationSpeed;
+            }
+            else
+            {
+                currentRotationSpeed = slowRotationSpeed;
+            }
         }
     }
 

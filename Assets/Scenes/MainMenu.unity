@@ -475,7 +475,8 @@ PrefabInstance:
       value: chest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 65702495048144492, guid: 6ace4285916c3714b8c59dd6c77eddd2, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ace4285916c3714b8c59dd6c77eddd2, type: 3}
