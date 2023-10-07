@@ -36,6 +36,11 @@ public class ShipMovement : MonoBehaviour
     private ParticleSystem.MainModule mainModule;
     public float slowRotationSpeed = 70.0f;  // New variable for slower rotation speed
     private float currentRotationSpeed;
+    public float maxStamina = 100f;
+    public float currentStamina;
+    public float staminaConsumptionRate = 10f;
+    public float staminaRecoveryRate = 5f;
+    private bool canBoost = true;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -50,6 +55,7 @@ public class ShipMovement : MonoBehaviour
         // Initialize audio
         audioSource.clip = boostSound;
         audioSource.volume = 0f;
+        currentStamina = maxStamina;  // Initialize current stamina
 
         // Initialize water splash main module
         mainModule = waterSplashEffect.main;
@@ -73,7 +79,8 @@ public class ShipMovement : MonoBehaviour
         float currentSpeed = speed;
         float targetFOV = normalFOV;
 
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        // Check both canBoost flag and the key press condition
+        if (canBoost && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && currentStamina > 0)
         {
             currentSpeed = boostedSpeed;
             targetFOV = boostedFOV;
@@ -98,6 +105,13 @@ public class ShipMovement : MonoBehaviour
                 }
                 fadeCoroutine = StartCoroutine(FadeInAudio());
             }
+
+            // Consume stamina while boosting
+            currentStamina = Mathf.Max(0, currentStamina - staminaConsumptionRate * Time.deltaTime);
+            if (currentStamina == 0)
+            {
+                canBoost = false;  // Disable boosting when stamina hits 0
+            }
         }
         else
         {
@@ -118,7 +132,17 @@ public class ShipMovement : MonoBehaviour
                 }
                 fadeCoroutine = StartCoroutine(FadeOutAudio());
             }
+
+            // Recover stamina when not boosting
+            currentStamina = Mathf.Min(maxStamina, currentStamina + staminaRecoveryRate * Time.deltaTime);
+            if (currentStamina >= maxStamina / 2)
+            {
+                canBoost = true;  // Enable boosting when stamina fully recovers
+            }
         }
+
+        // Log the current stamina value to the console
+        Debug.Log("Current Stamina: " + currentStamina);
 
         if (transform.position.y > islandHeightThreshold && Time.time - lastBounceTime > bounceCooldown) {
             lastBounceTime = Time.time;
@@ -185,7 +209,6 @@ public class ShipMovement : MonoBehaviour
             }
         }
     }
-
     IEnumerator FadeInAudio()
     {
         audioSource.Play();
