@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI; // Import the AI namespace
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BossAIShip : MonoBehaviour
 {
@@ -88,9 +89,15 @@ public class BossAIShip : MonoBehaviour
                 }
             }
             Destroy(gameObject); // Destroy the enemy GameObject
+            LoadGame("Victory"); // Load the "GameOver" scene
+
+
         }
     }
-
+    public void LoadGame(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
     void Update()
     {
     if (player == null)
