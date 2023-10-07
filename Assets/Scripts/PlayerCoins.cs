@@ -5,7 +5,7 @@ using TMPro;
 
 public class PlayerCoins : MonoBehaviour
 {
-    public static int coins = 10;
+    public static int coins = 0;
 
     public TextMeshProUGUI coinText;
 
@@ -57,5 +57,10 @@ public class PlayerCoins : MonoBehaviour
         {
             Debug.LogError("coinText is null. Please assign the TextMeshProUGUI component in the Inspector, or make sure the object with tag 'CoinText' has a TextMeshProUGUI component.");
         }
+    }
+
+    public static void ResetCoins()
+    {
+        coins = 0;
     }
 }
