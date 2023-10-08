@@ -144,6 +144,11 @@ public class BossAIShip : MonoBehaviour
             curState = FSMState.Chase;
         }
 
+        if (healthBar != null)
+        {
+            healthBar.gameObject.SetActive(false);
+        }
+
         if (health <= 0) {
             curState = FSMState.Dead;
         }
@@ -179,6 +184,11 @@ public class BossAIShip : MonoBehaviour
             curState = FSMState.Patrol;
         }
 
+        if (healthBar != null)
+        {
+            healthBar.gameObject.SetActive(true);
+        }
+
         if (health <= 0) {
             curState = FSMState.Dead;
         }
@@ -195,6 +205,11 @@ public class BossAIShip : MonoBehaviour
         if (distanceToPlayer > shootDistance && distanceToPlayer <= chaseDistance)
         {
             curState = FSMState.Chase;
+        }
+
+        if (healthBar != null)
+        {
+            healthBar.gameObject.SetActive(true);
         }
 
         if (health <= 0) {
