@@ -2163,7 +2163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: health
-      value: 250
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: healthX
@@ -2252,7 +2252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: health
-      value: 250
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: healthX
@@ -2816,7 +2816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4536895103901944695, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
       propertyPath: health
-      value: 400
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 4536895103901944695, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
       propertyPath: healthX
@@ -4803,7 +4803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: health
-      value: 250
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: healthX
@@ -4997,7 +4997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: health
-      value: 250
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: healthX
@@ -5327,7 +5327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: health
-      value: 250
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: healthX
@@ -5979,7 +5979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: health
-      value: 250
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: healthX
@@ -6148,7 +6148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: health
-      value: 250
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: healthX
@@ -7465,7 +7465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4536895103901944695, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
       propertyPath: health
-      value: 400
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 4536895103901944695, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
       propertyPath: healthX
@@ -7665,7 +7665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: health
-      value: 250
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: healthX
@@ -7876,7 +7876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4536895103901944695, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
       propertyPath: health
-      value: 400
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 4536895103901944695, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
       propertyPath: healthX
@@ -8004,7 +8004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4536895103901944695, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
       propertyPath: health
-      value: 400
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 4536895103901944695, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
       propertyPath: healthX
@@ -8792,7 +8792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4536895103901944695, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
       propertyPath: health
-      value: 400
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 4536895103901944695, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
       propertyPath: healthX
@@ -8908,7 +8908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: health
-      value: 250
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: healthX
@@ -9515,7 +9515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6454668714141504578, guid: 1a62129fc5da03d4ba59e8add6e77d68, type: 3}
       propertyPath: health
-      value: 1000
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 6454668714141504578, guid: 1a62129fc5da03d4ba59e8add6e77d68, type: 3}
       propertyPath: bossMusic
@@ -10294,7 +10294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: health
-      value: 250
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6318022788382615650, guid: 239a54045f890844baf120eaf546f7ec, type: 3}
       propertyPath: healthX
@@ -14058,7 +14058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4536895103901944695, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
       propertyPath: health
-      value: 400
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 4536895103901944695, guid: 9a6486b8c9627e644807d5afc791df8f, type: 3}
       propertyPath: healthX
