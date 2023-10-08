@@ -52,6 +52,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level3Boat Variant 1 Variant Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4490168276369653587, guid: c401367e4fc400f4fad65045e26aed6f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 31.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800795224222044295, guid: c401367e4fc400f4fad65045e26aed6f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 31.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338137631562383809, guid: c401367e4fc400f4fad65045e26aed6f, type: 3}
+      propertyPath: readyToShootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: abe5c4ab1c3c61046b916a5f7229e1d6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

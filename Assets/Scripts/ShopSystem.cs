@@ -132,6 +132,9 @@ public class ShopSystem : MonoBehaviour
             ShipShooting oldShipShooting = currentShipInstance.GetComponent<ShipShooting>();
             ShipMovement oldShipMovement = currentShipInstance.GetComponent<ShipMovement>();
 
+            Image oldStaminaBar = currentShipInstance.GetComponent<ShipMovement>().staminaBar;
+            Image oldStamina = currentShipInstance.GetComponent<ShipMovement>().stamina;
+
             Vector3 position = currentShipInstance.transform.position;
             Quaternion rotation = currentShipInstance.transform.rotation;
 
@@ -160,6 +163,9 @@ public class ShopSystem : MonoBehaviour
             player = currentShipInstance.GetComponent<ShipShooting>();
             speed = currentShipInstance.GetComponent<ShipMovement>();
             boostedSpeed = currentShipInstance.GetComponent<ShipMovement>();
+
+            currentShipInstance.GetComponent<ShipMovement>().staminaBar = oldStaminaBar;
+            currentShipInstance.GetComponent<ShipMovement>().stamina = oldStamina;
 
             ShipShooting newShipShooting = player;
             ShipMovement newShipMovement = speed;

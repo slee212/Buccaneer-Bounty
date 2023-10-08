@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 590621782944275598, guid: 9925d4ba5a4032a43820fb5f9c16873c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20.19
+      objectReference: {fileID: 0}
     - target: {fileID: 1440578133057774644, guid: 9925d4ba5a4032a43820fb5f9c16873c, type: 3}
       propertyPath: m_Name
       value: Level2Boat Variant Variant Variant
@@ -51,6 +55,10 @@ PrefabInstance:
     - target: {fileID: 1780653040020946574, guid: 9925d4ba5a4032a43820fb5f9c16873c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991978353889697675, guid: 9925d4ba5a4032a43820fb5f9c16873c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19.97
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5290162338480657811, guid: 9925d4ba5a4032a43820fb5f9c16873c, type: 3}
