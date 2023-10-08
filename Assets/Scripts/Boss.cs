@@ -8,7 +8,6 @@ public class BossAIShip : MonoBehaviour
 {
     public enum FSMState
     {
-        None,
         Patrol,
         Chase,
         Shoot,

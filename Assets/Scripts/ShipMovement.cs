@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShipMovement : MonoBehaviour
 {
@@ -41,6 +42,11 @@ public class ShipMovement : MonoBehaviour
     public float staminaConsumptionRate = 10f;
     public float staminaRecoveryRate = 5f;
     private bool canBoost = true;
+
+    public Image staminaBar;
+    public Image stamina;
+    private bool staminaBarVisible = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -208,7 +214,38 @@ public class ShipMovement : MonoBehaviour
                 currentRotationSpeed = slowRotationSpeed;
             }
         }
+
+        HandleStaminaBarVisibility();
     }
+
+    void HandleStaminaBarVisibility()
+    {
+        if ((isBoosting || currentStamina < maxStamina) && !staminaBarVisible)
+        {
+            staminaBar.gameObject.SetActive(true);
+            staminaBarVisible = true;
+        }
+        // Hide the stamina bar when stamina is full and not in use
+        else if (!isBoosting && currentStamina >= maxStamina && staminaBarVisible)
+        {
+            staminaBar.gameObject.SetActive(false);
+            staminaBarVisible = false;
+        }
+        
+        // Calculate the percentage of current stamina
+        float currentStaminaPercentage = currentStamina / maxStamina;
+        
+        // Determine the new width of the stamina fill based on the max width and current stamina percentage
+        float maxStaminaBarWidth = staminaBar.rectTransform.rect.width; // Assuming the staminaBar's width is the max width
+        float newWidth = maxStaminaBarWidth * currentStaminaPercentage;
+
+        // Get the current height of the stamina fill
+        float currentHeight = stamina.rectTransform.rect.height;
+
+        // Apply the new width to the stamina fill
+        stamina.rectTransform.sizeDelta = new Vector2(newWidth, currentHeight);
+    }
+
     IEnumerator FadeInAudio()
     {
         audioSource.Play();

@@ -7,7 +7,6 @@ public class EnemyAIShip : MonoBehaviour
 {
     public enum FSMState
     {
-        None,
         Patrol,
         Chase,
         Shoot,
