@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9142969129098201675, guid: 9925d4ba5a4032a43820fb5f9c16873c, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e3c47ea41eb2b0448b6535763b0737ad, type: 3}
+    - target: {fileID: -9142969129098201675, guid: 9925d4ba5a4032a43820fb5f9c16873c, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 2276483049621137561}
     - target: {fileID: 590621782944275598, guid: 9925d4ba5a4032a43820fb5f9c16873c, type: 3}
       propertyPath: m_LocalPosition.z
       value: 20.19
@@ -62,7 +70,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5290162338480657811, guid: 9925d4ba5a4032a43820fb5f9c16873c, type: 3}
+    - {fileID: 4921174797841714943, guid: 9925d4ba5a4032a43820fb5f9c16873c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9925d4ba5a4032a43820fb5f9c16873c, type: 3}
+--- !u!82 &2276483049621137561 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3138327185103364128, guid: 9925d4ba5a4032a43820fb5f9c16873c, type: 3}
+  m_PrefabInstance: {fileID: 3754351409627400377}
+  m_PrefabAsset: {fileID: 0}
