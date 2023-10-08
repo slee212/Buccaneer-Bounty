@@ -87,7 +87,7 @@ public class ShipMovement : MonoBehaviour
         float targetFOV = normalFOV;
 
         // Check both canBoost flag and the key press condition
-        if (canBoost && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && currentStamina > 0)
+        if (canBoost && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && currentStamina > 0 && !secondaryCamera.enabled)
         {
             currentSpeed = boostedSpeed;
             targetFOV = boostedFOV;
