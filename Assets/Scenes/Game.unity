@@ -1437,6 +1437,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1203008370830187413, guid: ea77e4dea4877504e9564fdf12b58721, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: abe5c4ab1c3c61046b916a5f7229e1d6, type: 3}
+    - target: {fileID: 1203008370830187413, guid: ea77e4dea4877504e9564fdf12b58721, type: 3}
       propertyPath: bulletSpeed
       value: 80
       objectReference: {fileID: 0}
@@ -9875,6 +9879,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1203008370830187413, guid: ea77e4dea4877504e9564fdf12b58721, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e3c47ea41eb2b0448b6535763b0737ad, type: 3}
+    - target: {fileID: 1203008370830187413, guid: ea77e4dea4877504e9564fdf12b58721, type: 3}
       propertyPath: bulletSpeed
       value: 80
       objectReference: {fileID: 0}
@@ -13405,6 +13413,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 796982746}
     - target: {fileID: 5537067357491029929, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 2140616290}
+    - target: {fileID: 5537067357491029929, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
       propertyPath: upgradeShip
       value: 
       objectReference: {fileID: 775986089}
@@ -13416,6 +13428,10 @@ PrefabInstance:
       propertyPath: upgradeSpeed
       value: 
       objectReference: {fileID: 803468536}
+    - target: {fileID: 5537067357491029929, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
+      propertyPath: purchaseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 264a00b745b23e84a9882cad874cbefe, type: 3}
     - target: {fileID: 5537067357491029929, guid: 61d1d51819a2fdf4991eea83a36b5a3e, type: 3}
       propertyPath: upgradeDamage
       value: 
@@ -14928,6 +14944,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117369023}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!82 &2140616290 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8349111266757071367, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
+  m_PrefabInstance: {fileID: 8244551906309433605}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &3206619961287407421 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 3235256987002683705, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
@@ -15065,6 +15086,14 @@ PrefabInstance:
       propertyPath: coinText
       value: 
       objectReference: {fileID: 775154667}
+    - target: {fileID: 6531320568302766352, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e3c47ea41eb2b0448b6535763b0737ad, type: 3}
+    - target: {fileID: 6531320568302766352, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 2140616290}
     m_RemovedComponents:
     - {fileID: 1664538247554155423, guid: 070fcf632c8600c408c5e2088f8cfdf6, type: 3}
     m_RemovedGameObjects: []

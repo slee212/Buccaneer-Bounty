@@ -51,6 +51,9 @@ public class ShopSystem : MonoBehaviour
 
     Vector3 startPosition = new Vector3(93, 1, 69);
 
+    public AudioSource audioSource;
+    public AudioClip purchaseSound;
+
     // Start is called before the first frame update
     void Start()
     {   
@@ -83,7 +86,8 @@ public class ShopSystem : MonoBehaviour
             UpdateCoinUI();
             UpdateButtonInteractivity();
             UpdateShopTexts();
-            Debug.Log(player.shootCooldown);
+            
+            PlayPurchaseSound();
         }
     }
 
@@ -102,6 +106,8 @@ public class ShopSystem : MonoBehaviour
             UpdateCoinUI();
             UpdateButtonInteractivity();
             UpdateShopTexts();
+
+            PlayPurchaseSound();
         }
     }
 
@@ -119,6 +125,8 @@ public class ShopSystem : MonoBehaviour
             UpdateCoinUI();
             UpdateButtonInteractivity();
             UpdateShopTexts();
+
+            PlayPurchaseSound();
         }
     }
 
@@ -170,13 +178,15 @@ public class ShopSystem : MonoBehaviour
             ShipShooting newShipShooting = player;
             ShipMovement newShipMovement = speed;
 
+            audioSource = newShipShooting.audioSource;
+
             newShipShooting.damage = oldShipShooting.damage;
             newShipShooting.shootCooldown = oldShipShooting.shootCooldown;
             newShipMovement.speed = oldShipMovement.speed;
 
             shipLevel++;
-            Debug.Log("Ship level increased" + shipLevel);
-
+            
+            PlayPurchaseSound();
             UpdateCoinUI();
             UpdateButtonInteractivity();            
         }
@@ -191,6 +201,8 @@ public class ShopSystem : MonoBehaviour
             playerShip = currentShipInstance.GetComponent<PlayerShip>();
             playerShip.health = playerShip.maxHealth;
             playerShip.UpdateHealthbar();
+
+            PlayPurchaseSound();
             UpdateCoinUI();
             UpdateButtonInteractivity();
         }
@@ -278,5 +290,10 @@ public class ShopSystem : MonoBehaviour
     {
         currentShopType = type;
         UpdateButtonInteractivity();
+    }
+
+    public void PlayPurchaseSound()
+    {
+        audioSource.PlayOneShot(purchaseSound);
     }
 }

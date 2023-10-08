@@ -6,12 +6,19 @@ using TMPro;
 public class PlayerCoins : MonoBehaviour
 {
     public static int coins = 0;
-
     public TextMeshProUGUI coinText;
+
+    public AudioSource audioSource;
+    public AudioClip deathSound;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
         // Attempt to automatically find the coinText object by tag
         GameObject coinTextObj = GameObject.FindWithTag("coinCounter");
         if (coinTextObj != null)
@@ -28,9 +35,8 @@ public class PlayerCoins : MonoBehaviour
 
     public void AddCoin()
     {
-        Debug.Log("AddCoin method called!");
+        audioSource.PlayOneShot(deathSound);
         coins += 2;
-        Debug.Log("Coin collected! Current coins: " + coins);
         UpdateCoinUI();
     }
 
