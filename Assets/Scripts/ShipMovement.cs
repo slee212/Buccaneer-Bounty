@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ShipMovement : MonoBehaviour
 {
     public float speed = 5.0f;
-    public float boostedSpeed = 10.0f;
+    public float boostedSpeed;
     public float rotationSpeed = 200.0f;
     public Camera mainCamera;
     public Camera secondaryCamera;
@@ -49,6 +49,7 @@ public class ShipMovement : MonoBehaviour
 
     void Start()
     {
+        boostedSpeed = speed + 5.0f;
         rb = GetComponent<Rigidbody>();
         mainCamera.enabled = true;
         secondaryCamera.enabled = false;
