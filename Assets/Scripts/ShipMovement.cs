@@ -149,8 +149,6 @@ public class ShipMovement : MonoBehaviour
         }
 
         // Log the current stamina value to the console
-        Debug.Log("Current Stamina: " + currentStamina);
-
         if (transform.position.y > islandHeightThreshold && Time.time - lastBounceTime > bounceCooldown) {
             lastBounceTime = Time.time;
             Vector3 bounceDirection = -transform.forward;
