@@ -68,7 +68,7 @@ public class BossAIShip : MonoBehaviour
         healthBarObject.transform.SetParent(transform); // set the enemy as parent
 
         // Position and scale adjustment
-        healthBarObject.transform.localPosition = new Vector3(0, 2, 0); // local offset
+        healthBarObject.transform.localPosition = new Vector3(-25, 30, -10); // local offset
         healthBarObject.transform.localScale = new Vector3(1f, 1f, 1f); // adjust the scale
 
         // Find the main camera and assign it to the Canvas' worldCamera property

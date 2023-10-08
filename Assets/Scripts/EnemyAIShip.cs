@@ -37,6 +37,10 @@ public class EnemyAIShip : MonoBehaviour
     private Transform player;
     private int currentWaypoint = 0;
 
+    public int healthX = 0;
+    public int healthY = 2;
+    public int healthZ = -15;
+
     public GameObject healthBarPrefab;
     private HealthBar healthBar;
 
@@ -61,7 +65,7 @@ public class EnemyAIShip : MonoBehaviour
         healthBarObject.transform.SetParent(transform); // set the enemy as parent
 
         // Position and scale adjustment
-        healthBarObject.transform.localPosition = new Vector3(0, 2, 0); // local offset
+        healthBarObject.transform.localPosition = new Vector3(healthX, healthY, healthZ); // local offset
         healthBarObject.transform.localScale = new Vector3(1f, 1f, 1f); // adjust the scale
 
         // Find the main camera and assign it to the Canvas' worldCamera property
